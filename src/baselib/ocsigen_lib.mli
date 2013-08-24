@@ -73,6 +73,7 @@ module Url : sig
   val encode : ?plus:bool -> string -> string
   val decode : ?plus:bool -> string -> string
   val make_encoded_parameters : (string * string) list -> string
+  val dest_url_encoded_parameters : string -> (string * string) list
   val string_of_url_path : encode:bool -> path -> uri
   val parse : t ->
     bool option * string option * int option *

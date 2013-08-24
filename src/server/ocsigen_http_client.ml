@@ -754,7 +754,7 @@ let post_string_url ?v6 ?headers ~content ~content_type url =
 let post_urlencoded ?v6 ?https ?port ?headers ~host ~uri ~content () =
   post_string ?v6 ?https ?port ?headers
     ~host ~uri
-    ~content:(Netencoding.Url.mk_url_encoded_parameters content)
+    ~content:(Url.make_encoded_parameters content)
     ~content_type:("application","x-www-form-urlencoded")
     ()
 

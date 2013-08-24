@@ -290,7 +290,7 @@ end = struct
                OStream.string_of_stream
                  (OConf.get_maxrequestbodysizeinmemory ()) >|=
                Url.fixup_url_string >|=
-               Netencoding.Url.dest_url_encoded_parameters
+               Url.dest_url_encoded_parameters
       )
       (function
          | OStream.String_too_large -> Lwt.fail Input_is_too_large
