@@ -101,7 +101,7 @@ let parse_config = function
                        else
                          failwith "credentials"
                      in
-                     let decoded = Netencoding.Base64.decode encoded in
+                     let decoded = Cryptokit.transform_string (Cryptokit.Base64.decode ()) encoded in
                      let i = String.index decoded ':' in
                      (String.sub decoded 0 i,
                       String.sub decoded (i+1) (String.length decoded - (i+1)))

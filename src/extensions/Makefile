@@ -3,8 +3,9 @@ include ../../Makefile.config
 PACKAGE  := lwt.unix     \
 	    lwt.ssl      \
 	    lwt.react    \
-            netstring    \
-            netstring-pcre \
+      cryptokit \
+      netstring    \
+      netstring-pcre \
 	    tyxml.parser \
 
 LIBS     := -I ../baselib -I ../http -I ../server ${addprefix -package ,${PACKAGE}}
