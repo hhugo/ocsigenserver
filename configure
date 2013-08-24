@@ -416,8 +416,6 @@ check_library netstring \
     "See ocamlnet: http://projects.camlcity.org/projects/ocamlnet.html"
 check_library netstring-pcre \
     "See ocamlnet: http://projects.camlcity.org/projects/ocamlnet.html"
-check_library netsys \
-    "See ocamlnet: http://projects.camlcity.org/projects/ocamlnet.html"
 
 check_library pcre "See: http://ocaml.info/home/ocaml_sources.html"
 check_library cryptokit "See: http://pauillac.inria.fr/~xleroy/software.html#cryptokit"

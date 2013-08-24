@@ -35,11 +35,11 @@ SERVER_PACKAGE := lwt.ssl           \
 	          ${LWT_EXTRA_PACKAGE} \
 	          netstring         \
 	          netstring-pcre    \
-                  findlib           \
+            findlib           \
 	          cryptokit         \
-		  tyxml             \
+		        tyxml             \
 	          tyxml.parser      \
-                  dynlink           \
+            dynlink           \
 
 SERVER_SYNTAX :=  tyxml.syntax      \
 
@@ -51,4 +51,3 @@ INITPACKAGE := \"$(shell ${OCAMLFIND} query -p-format -recursive        \
                \"${PROJECTNAME}.baselib\";      \
                \"${PROJECTNAME}.http\";         \
                \"${PROJECTNAME}\";              \
-

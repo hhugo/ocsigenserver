@@ -42,8 +42,8 @@ let default_default_hostname =
   try
 (*VVV Is it ok? Is it reliable? *)
     (List.hd
-       (Unix.getaddrinfo hostname "www" 
-          [Unix.AI_CANONNAME; 
+       (Unix.getaddrinfo hostname "www"
+          [Unix.AI_CANONNAME;
            Unix.AI_SOCKTYPE Unix.SOCK_STREAM])).Unix.ai_canonname
   with Failure _ ->
     let warning =
@@ -101,7 +101,7 @@ let parse_size =
                else
                  if (c1 = "k")
                  then Int64.mul kibi (v l1)
-                 else       
+                 else
                    let l2 = l-2 in
                    if l2>0
                    then
@@ -117,7 +117,7 @@ let parse_size =
                          else
                            if (c2 = "ko") || (c2 = "kB")
                            then Int64.mul kilo (v l2)
-                           else       
+                           else
                              let l3 = l-3 in
                              if l3>0
                              then
@@ -139,12 +139,12 @@ let parse_size =
          else o l)
 
 
-let parse_size_tag tag s = 
+let parse_size_tag tag s =
   try
-    parse_size s 
-  with Failure _ -> 
+    parse_size s
+  with Failure _ ->
     raise
-      (Ocsigen_config.Config_file_error 
+      (Ocsigen_config.Config_file_error
          ("While parsing <"^tag^"> - "^s^" is not a valid size."))
 
 
@@ -163,12 +163,12 @@ let rec parse_string = function
   | (PCData s)::l -> s^(parse_string l)
   | _ -> failwith "ocsigen_parseconfig.parse_string"
 
-let parse_string_tag tag s = 
+let parse_string_tag tag s =
   try
-    parse_string s 
-  with Failure _ -> 
+    parse_string s
+  with Failure _ ->
     raise
-      (Ocsigen_config.Config_file_error 
+      (Ocsigen_config.Config_file_error
          ("While parsing <"^tag^"> - String expected."))
 
 
@@ -215,7 +215,7 @@ let correct_hostname =
 (* Splits the [host] field, first according to spaces
    (which encode disjunction),
    and then according to wildcards '*' ; we then transform the hosts-with-regexp
-   into a regepx that matches a potential host. 
+   into a regepx that matches a potential host.
    The whole result is cached because user config files (for userconf)
    are read at each request. *)
 let parse_host_field =
@@ -242,20 +242,16 @@ let parse_host_field =
                    | Failure _ ->
                        raise (Config_file_error "bad port number")
                in
-               let split_host = function
-                 | Netstring_str.Delim _ -> ".*"
-                 | Netstring_str.Text t -> Netstring_pcre.quote t
-               in
                (host,
                 Netstring_pcre.regexp
-                  (String.concat ""
-                     ((List.map split_host
-                         (Netstring_str.full_split
-                            (Netstring_str.regexp "[*]+") host))@["$"])),
+                  (String.concat ".*"
+                     (List.map
+                        Netstring_pcre.quote
+                        (Netstring_pcre.split (Netstring_pcre.regexp "[*]+") host)) ^ "$"),
                 port)
              in
              List.map parse_one_host
-               (Netstring_str.split (Netstring_str.regexp "[ \t]+") s)
+               (Netstring_pcre.split (Netstring_pcre.regexp "[ \t]+") s)
        in
        Hashtbl.add h hostfilter r;
        (r : Ocsigen_extensions.virtual_hosts)
@@ -428,25 +424,25 @@ let parse_server isreloading c =
           end;
           parse_server_aux ll
       | (Element ("host", atts, l))::ll ->
-          let rec parse_attrs ((name, 
-                                charset, 
-                                defaulthostname, 
-                                defaulthttpport, 
+          let rec parse_attrs ((name,
+                                charset,
+                                defaulthostname,
+                                defaulthttpport,
                                 defaulthttpsport) as r) = function
             | [] -> r
             | ("hostfilter", s)::suite ->
                 (match name with
-                | None -> parse_attrs ((Some s), charset, 
-                                       defaulthostname, 
-                                       defaulthttpport, 
+                | None -> parse_attrs ((Some s), charset,
+                                       defaulthostname,
+                                       defaulthttpport,
                                        defaulthttpsport) suite
                 | _ -> raise (Ocsigen_config.Config_file_error
                                 ("Duplicate attribute name in <host>")))
             | ("charset", s)::suite ->
                 (match charset with
-                | None -> parse_attrs (name, Some s, 
-                                       defaulthostname, 
-                                       defaulthttpport, 
+                | None -> parse_attrs (name, Some s,
+                                       defaulthostname,
+                                       defaulthttpport,
                                        defaulthttpsport) suite
                 | _ -> raise (Ocsigen_config.Config_file_error
                                 ("Duplicate attribute charset in <host>")))
@@ -465,17 +461,17 @@ let parse_server isreloading c =
                                 ("Duplicate attribute defaulthostname in <host>")))
             | ("defaulthttpport", s)::suite ->
                 (match defaulthttpport with
-                | None -> parse_attrs (name, charset, 
-                                       defaulthostname, 
-                                       (Some s), 
+                | None -> parse_attrs (name, charset,
+                                       defaulthostname,
+                                       (Some s),
                                        defaulthttpsport) suite
                 | _ -> raise (Ocsigen_config.Config_file_error
                                 ("Duplicate attribute defaulthttpport in <host>")))
             | ("defaulthttpsport", s)::suite ->
                 (match defaulthttpsport with
-                | None -> parse_attrs (name, charset, 
-                                       defaulthostname, 
-                                       defaulthttpport, 
+                | None -> parse_attrs (name, charset,
+                                       defaulthostname,
+                                       defaulthttpport,
                                        Some s) suite
                 | _ -> raise (Ocsigen_config.Config_file_error
                                 ("Duplicate attribute defaulthttpsport in <host>")))
@@ -729,7 +725,7 @@ let extract_info c =
   ((user, group), si, (mint, maxt))
 
 let parse_config ?file () =
-  let file = 
+  let file =
     match file with
       | None -> Ocsigen_config.get_config_file ()
       | Some f -> f
