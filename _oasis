@@ -1,0 +1,141 @@
+OASISFormat: 0.3
+Name:        ocsigenserver
+Version:     2.2.0
+Synopsis:    web server
+Authors:     Vincent Balat
+License:     LGPL-2.1 with OCaml linking exception
+Plugins:     META (0.3), DevFiles (0.3)
+BuildTools: ocamlbuild
+FilesAB: src/baselib/ocsigen_config.ml.ab
+
+Flag natdynlink
+  Description: Compile with natdynlink support
+  Default: true
+
+Executable "ocsigenserver"
+  Path: src/server
+  MainIs: server_main.ml
+  CompiledObject: best
+  BuildDepends: ocsigenserver.baselib, ocsigenserver.http,
+    ocsigenserver.polytables, ocsigenserver, lwt.unix, lwt.ssl,tyxml.parser
+
+Library "ocsigenserver"
+  Path: src/server
+  Modules: Ocsigen_extensions, Ocsigen_range, Ocsigen_parseconfig,
+    Ocsigen_http_client, Ocsigen_local_files, Ocsigen_server
+  BuildDepends: lwt,ocsigenserver.baselib,ocsigenserver.cookie,tyxml,ssl
+
+Library "polytables"
+  Path:       src/baselib
+  FindlibParent : ocsigenserver
+  Modules:    Polytables
+
+Library commandline
+  Path:       src/baselib-cmd
+  FindlibParent : ocsigenserver
+  Modules:    Ocsigen_getcommandline
+
+
+Library baselib
+  Path:       src/baselib
+  FindlibParent : ocsigenserver
+  Modules:    Ocsigen_lib_base, Ocsigen_lib, Ocsigen_cache, Ocsigen_config,
+    Ocsigen_commandline, Ocsigen_messages, Dynlink_wrapper, Ocsigen_loader,
+    Ocsigen_stream
+  BuildDepends: lwt,lwt.syntax,cryptokit,netstring,
+    netstring-pcre,findlib,ocsigenserver.commandline,lwt.unix,dynlink,lwt.preemptive
+
+Library cookie
+  Path:       src/http-cookie
+  FindlibParent : ocsigenserver
+  Modules:    Ocsigen_cookies
+  BuildDepends: lwt,ocsigenserver.baselib
+
+Library http
+  Path:       src/http
+  FindlibParent : ocsigenserver
+  Modules:    Multipart, Http_headers, Ocsigen_http_frame,
+    Ocsigen_headers, Http_lexer, Ocsigen_http_com, Ocsigen_charset_mime,
+    Ocsigen_senders
+  InternalModules: Framepp
+  BuildDepends: ocsigenserver.baselib,tyxml,ssl,ocsigenserver.cookie
+
+Library redirectmod
+  Path:       src/extensions
+  FindlibContainers : ocsigenserver.ext
+  Modules:    Redirectmod
+  BuildDepends: ocsigenserver.baselib, ocsigenserver, ocsigenserver.http
+
+
+Library outputfilter
+  Path:       src/extensions
+  FindlibContainers : ocsigenserver.ext
+  Modules:    Outputfilter
+  BuildDepends: ocsigenserver.baselib, ocsigenserver
+
+Library userconf
+  Path:       src/extensions
+  FindlibContainers : ocsigenserver.ext
+  Modules:    Userconf
+  BuildDepends: ocsigenserver.baselib, ocsigenserver
+
+Library staticmod
+  Path:       src/extensions
+  FindlibContainers : ocsigenserver.ext
+  Modules:    Staticmod
+  BuildDepends: ocsigenserver.baselib, ocsigenserver
+
+Library revproxy
+  Path:       src/extensions
+  FindlibContainers : ocsigenserver.ext
+  Modules:    Revproxy
+  BuildDepends: ocsigenserver.baselib, ocsigenserver
+
+Library accesscontrol
+  Path:       src/extensions
+  FindlibContainers : ocsigenserver.ext
+  Modules:    Accesscontrol
+  BuildDepends: ocsigenserver.baselib, ocsigenserver
+
+Library cors
+  Path:       src/extensions
+  FindlibContainers : ocsigenserver.ext
+  Modules:    Cors
+  BuildDepends: ocsigenserver.baselib, ocsigenserver
+
+Library extendconfiguration
+  Path:       src/extensions
+  FindlibContainers : ocsigenserver.ext
+  Modules:    Extendconfiguration
+  BuildDepends: ocsigenserver.baselib, ocsigenserver
+
+Library authbasic
+  Path:       src/extensions
+  FindlibContainers : ocsigenserver.ext
+  Modules:    Authbasic
+  BuildDepends: ocsigenserver.baselib, ocsigenserver
+
+Library cgi
+  Path:       src/extensions
+  FindlibContainers : ocsigenserver.ext
+  Modules:    Cgimod
+  BuildDepends: ocsigenserver.baselib, ocsigenserver
+
+Library deflatemod
+  Path:       src/extensions
+  FindlibContainers : ocsigenserver.ext
+  Modules:    Deflatemod
+  BuildDepends: ocsigenserver.baselib, ocsigenserver,camlzip
+
+
+Library rewritemod
+  Path:       src/extensions
+  FindlibContainers : ocsigenserver.ext
+  Modules:    Rewritemod
+  BuildDepends: ocsigenserver.baselib, ocsigenserver
+
+Library comet
+  Path:       src/extensions
+  FindlibContainers : ocsigenserver.ext
+  Modules:    Ocsigen_comet
+  BuildDepends: ocsigenserver.baselib, ocsigenserver, react

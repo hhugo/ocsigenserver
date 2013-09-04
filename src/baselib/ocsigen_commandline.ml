@@ -18,12 +18,12 @@
 
 open Ocsigen_config
 
-let cmdline : unit = 
+let cmdline : unit =
   try
     Arg.parse_argv Ocsigen_getcommandline.commandline
-      [("-c", Arg.String set_configfile,
+      [("-c", Arg.String Ocsigen_config.set_configfile,
         "Alternate config file (default "^ Ocsigen_config.get_config_file() ^")");
-       ("--config", Arg.String set_configfile,
+       ("--config", Arg.String Ocsigen_config.set_configfile,
         "Alternate config file (default "^ Ocsigen_config.get_config_file() ^")");
        ("-s", Arg.Unit set_silent, "Silent mode (error messages in errors.log only)");
        ("--silent", Arg.Unit set_silent, "Silent mode (error messages in errors.log only)");

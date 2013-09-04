@@ -1,0 +1,199 @@
+# OASIS_START
+# DO NOT EDIT (digest: 0bdc2716e9e722b2593f924b6634ff9c)
+version = "2.2.0"
+description = "web server"
+requires = "lwt ocsigenserver.baselib ocsigenserver.cookie tyxml ssl"
+archive(byte) = "ocsigenserver.cma"
+archive(byte, plugin) = "ocsigenserver.cma"
+archive(native) = "ocsigenserver.cmxa"
+archive(native, plugin) = "ocsigenserver.cmxs"
+exists_if = "ocsigenserver.cma"
+package "polytables" (
+ version = "2.2.0"
+ description = "web server"
+ archive(byte) = "polytables.cma"
+ archive(byte, plugin) = "polytables.cma"
+ archive(native) = "polytables.cmxa"
+ archive(native, plugin) = "polytables.cmxs"
+ exists_if = "polytables.cma"
+)
+
+package "http" (
+ version = "2.2.0"
+ description = "web server"
+ requires = "ocsigenserver.baselib tyxml ssl ocsigenserver.cookie"
+ archive(byte) = "http.cma"
+ archive(byte, plugin) = "http.cma"
+ archive(native) = "http.cmxa"
+ archive(native, plugin) = "http.cmxs"
+ exists_if = "http.cma"
+)
+
+package "ext" (
+ description = "Virtual container"
+ package "userconf" (
+  version = "2.2.0"
+  description = "web server"
+  requires = "ocsigenserver.baselib ocsigenserver"
+  archive(byte) = "userconf.cma"
+  archive(byte, plugin) = "userconf.cma"
+  archive(native) = "userconf.cmxa"
+  archive(native, plugin) = "userconf.cmxs"
+  exists_if = "userconf.cma"
+ )
+ package "staticmod" (
+  version = "2.2.0"
+  description = "web server"
+  requires = "ocsigenserver.baselib ocsigenserver"
+  archive(byte) = "staticmod.cma"
+  archive(byte, plugin) = "staticmod.cma"
+  archive(native) = "staticmod.cmxa"
+  archive(native, plugin) = "staticmod.cmxs"
+  exists_if = "staticmod.cma"
+ )
+ package "rewritemod" (
+  version = "2.2.0"
+  description = "web server"
+  requires = "ocsigenserver.baselib ocsigenserver"
+  archive(byte) = "rewritemod.cma"
+  archive(byte, plugin) = "rewritemod.cma"
+  archive(native) = "rewritemod.cmxa"
+  archive(native, plugin) = "rewritemod.cmxs"
+  exists_if = "rewritemod.cma"
+ )
+ package "revproxy" (
+  version = "2.2.0"
+  description = "web server"
+  requires = "ocsigenserver.baselib ocsigenserver"
+  archive(byte) = "revproxy.cma"
+  archive(byte, plugin) = "revproxy.cma"
+  archive(native) = "revproxy.cmxa"
+  archive(native, plugin) = "revproxy.cmxs"
+  exists_if = "revproxy.cma"
+ )
+ package "redirectmod" (
+  version = "2.2.0"
+  description = "web server"
+  requires = "ocsigenserver.baselib ocsigenserver ocsigenserver.http"
+  archive(byte) = "redirectmod.cma"
+  archive(byte, plugin) = "redirectmod.cma"
+  archive(native) = "redirectmod.cmxa"
+  archive(native, plugin) = "redirectmod.cmxs"
+  exists_if = "redirectmod.cma"
+ )
+ package "outputfilter" (
+  version = "2.2.0"
+  description = "web server"
+  requires = "ocsigenserver.baselib ocsigenserver"
+  archive(byte) = "outputfilter.cma"
+  archive(byte, plugin) = "outputfilter.cma"
+  archive(native) = "outputfilter.cmxa"
+  archive(native, plugin) = "outputfilter.cmxs"
+  exists_if = "outputfilter.cma"
+ )
+ package "extendconfiguration" (
+  version = "2.2.0"
+  description = "web server"
+  requires = "ocsigenserver.baselib ocsigenserver"
+  archive(byte) = "extendconfiguration.cma"
+  archive(byte, plugin) = "extendconfiguration.cma"
+  archive(native) = "extendconfiguration.cmxa"
+  archive(native, plugin) = "extendconfiguration.cmxs"
+  exists_if = "extendconfiguration.cma"
+ )
+ package "deflatemod" (
+  version = "2.2.0"
+  description = "web server"
+  requires = "ocsigenserver.baselib ocsigenserver camlzip"
+  archive(byte) = "deflatemod.cma"
+  archive(byte, plugin) = "deflatemod.cma"
+  archive(native) = "deflatemod.cmxa"
+  archive(native, plugin) = "deflatemod.cmxs"
+  exists_if = "deflatemod.cma"
+ )
+ package "cors" (
+  version = "2.2.0"
+  description = "web server"
+  requires = "ocsigenserver.baselib ocsigenserver"
+  archive(byte) = "cors.cma"
+  archive(byte, plugin) = "cors.cma"
+  archive(native) = "cors.cmxa"
+  archive(native, plugin) = "cors.cmxs"
+  exists_if = "cors.cma"
+ )
+ package "comet" (
+  version = "2.2.0"
+  description = "web server"
+  requires = "ocsigenserver.baselib ocsigenserver react"
+  archive(byte) = "comet.cma"
+  archive(byte, plugin) = "comet.cma"
+  archive(native) = "comet.cmxa"
+  archive(native, plugin) = "comet.cmxs"
+  exists_if = "comet.cma"
+ )
+ package "cgi" (
+  version = "2.2.0"
+  description = "web server"
+  requires = "ocsigenserver.baselib ocsigenserver"
+  archive(byte) = "cgi.cma"
+  archive(byte, plugin) = "cgi.cma"
+  archive(native) = "cgi.cmxa"
+  archive(native, plugin) = "cgi.cmxs"
+  exists_if = "cgi.cma"
+ )
+ package "authbasic" (
+  version = "2.2.0"
+  description = "web server"
+  requires = "ocsigenserver.baselib ocsigenserver"
+  archive(byte) = "authbasic.cma"
+  archive(byte, plugin) = "authbasic.cma"
+  archive(native) = "authbasic.cmxa"
+  archive(native, plugin) = "authbasic.cmxs"
+  exists_if = "authbasic.cma"
+ )
+ package "accesscontrol" (
+  version = "2.2.0"
+  description = "web server"
+  requires = "ocsigenserver.baselib ocsigenserver"
+  archive(byte) = "accesscontrol.cma"
+  archive(byte, plugin) = "accesscontrol.cma"
+  archive(native) = "accesscontrol.cmxa"
+  archive(native, plugin) = "accesscontrol.cmxs"
+  exists_if = "accesscontrol.cma"
+ )
+)
+
+package "cookie" (
+ version = "2.2.0"
+ description = "web server"
+ requires = "lwt ocsigenserver.baselib"
+ archive(byte) = "cookie.cma"
+ archive(byte, plugin) = "cookie.cma"
+ archive(native) = "cookie.cmxa"
+ archive(native, plugin) = "cookie.cmxs"
+ exists_if = "cookie.cma"
+)
+
+package "commandline" (
+ version = "2.2.0"
+ description = "web server"
+ archive(byte) = "commandline.cma"
+ archive(byte, plugin) = "commandline.cma"
+ archive(native) = "commandline.cmxa"
+ archive(native, plugin) = "commandline.cmxs"
+ exists_if = "commandline.cma"
+)
+
+package "baselib" (
+ version = "2.2.0"
+ description = "web server"
+ requires =
+ "lwt lwt.syntax cryptokit netstring netstring-pcre findlib ocsigenserver.commandline lwt.unix dynlink lwt.preemptive"
+ archive(byte) = "baselib.cma"
+ archive(byte, plugin) = "baselib.cma"
+ archive(native) = "baselib.cmxa"
+ archive(native, plugin) = "baselib.cmxs"
+ exists_if = "baselib.cma"
+)
+# OASIS_STOP
+
